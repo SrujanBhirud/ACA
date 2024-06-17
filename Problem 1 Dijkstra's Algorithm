@@ -11,7 +11,7 @@ void addEdge(vector<iPair> graph[], int u, int v,int w) {
     graph[v].push_back(make_pair(u,w));
 }
 
-void dijkstras(vector<iPair> graph[], int n, int v){          // n is number of nodes, v is starting vertice.
+void dijkstras(vector<iPair> graph[], int v, int n){          // n is number of nodes, v is starting vertice.
     vector<int> visited(n,0);
     vector<iPair> dist(n);      //First int is dist and second int is prev node.
     for(int i =0;i<n;i++){
@@ -39,17 +39,29 @@ void dijkstras(vector<iPair> graph[], int n, int v){          // n is number of 
         }
     }
     mp[v] = dist;
-    printf("Vertex Distance from Source\n");
-    for (int i = 1; i < n; ++i)
-        printf("%d \t\t %d \t\t %d\n", i, dist[i].first,dist[i].second);
-
 }
 
-void shortest_dist(int start,int n){
+void shortest_dist(vector<iPair> graph[],int start,int n){
+    if(!(mp.find(start)!=mp.end())){
+        dijkstras(graph,start,n);
+    }
+
     vector<iPair> vec = mp[start];
-    cout << "Vertex \t\t\t Distance \t\t\t Path";
+    cout << "Vertex \t\t\t Distance \t\t\t Path" << endl;
     for(int i =1 ;i<n;i++){
-        int dist = vec[i].first;
+        int dist = vec[i].first, prev_node = vec[i].second, len = 1;
+        
+        printf("%d \t\t\t %d \t\t\t ",i,dist);
+        
+        vector<int> path = {prev_node}; 
+        while(prev_node != start){
+            prev_node = vec[prev_node].second;
+            path.push_back(prev_node);
+            len++;
+        }
+        for(int i = len-1; i >=0;i--)
+            cout << path[i] << " ";
+        cout << endl;
     }
 }
 
@@ -67,6 +79,6 @@ int main(){
     addEdge(graph,3,5,9);
     addEdge(graph,3,6,3);
 
-    dijkstras(graph,n,1);
+    shortest_dist(graph, 1,n);
     return 0;
 }
