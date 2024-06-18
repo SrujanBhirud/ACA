@@ -1,11 +1,22 @@
 README
 
 Dijkstra's Algorithm
+For each node, we will store its shortest distance from the root node and the previous node in the shortest path between them in vector dist.
+Initialize the initial distance to infinity
+Keep a priority queue(based on min heap) which will help us access the element with min distance
+while priority queue is non empty:
+  retrieve the node at the top of PQ
+  mark this node(,say v) visited
+  iterate through its connected unvisited nodes:
+    if the minimum distance to this node is greater than the distance through node v(dist[v] + weight) of path between them
+      then we update it's distance
+      push this node into the priority queue.
+
+SO basically, at a particular iteration, we are visit the unvisited node nearest to root node. We iterate through this node's neighbours. If the distance to any neighbour through this node is found to be shorter, we update the neighbour's path.
 
 
-
-
-
+Now, we have the shortest distance of all nodes from root node and also have the previous node to each in the path between them.
+To reconstruct the path from any node to root node, we push it's prev_node, and then the prev_node to this node and so on until we reach the root node.
 
 Problem 2
 Problem 3
