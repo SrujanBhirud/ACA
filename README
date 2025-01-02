@@ -1,6 +1,8 @@
 README
+This Repo is for the submission of DSA tasks for a project by Association of Computing Activites, IIT Kanpur.
 
 Dijkstra's Algorithm
+
 For each node, we will store its shortest distance from the root node and the previous node in the shortest path between them in vector dist.
 Initialize the initial distance to infinity
 Keep a priority queue(based on min heap) which will help us access the element with min distance
